@@ -1,0 +1,551 @@
+
+<!-- Tabla-->
+<div class="table-responsive mt-3">
+  
+    <table class="table  table-bordered table-striped">
+      <thead>
+        <tr> 
+          <th scope="col">#</th>
+          <th scope="col">Agencia</th>
+          <th scope="col">Vin</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">nombreCliente</th>
+          <th scope="col">Agente</th>
+          <th scope="col">nombreAgente</th>
+          <th scope="col">Mov</th>
+          <th scope="col">MovID</th>
+          <th scope="col">FechaVenta</th>
+          <th scope="col">FechaCompra</th>
+          <th scope="col">DescripUnidad</th>
+          <th scope="col">Modelo</th>
+          <th scope="col">situacion</th>
+          <th scope="col">CC</th>
+          <th scope="col">Venta</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Rebate</th>
+          <th scope="col">NotaCredito</th>
+          <th scope="col">AccesoriosV</th>
+          <th scope="col">Incentivos</th>
+          <th scope="col">AccesoriosC</th>
+          <th scope="col">Gastos</th>
+          <th scope="col">CostoExtra</th>
+          <th scope="col">Participacion</th>
+          <th scope="col">UtilidadBruta</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.agencia}}</td>
+          <td>{{item.vin}}</td>
+          <td>{{item.cliente}}</td>
+          <td>{{item.nombreCliente}}</td>
+          <td>{{item.agente}}</td>
+          <td>{{item.nombreAgente}}</td>
+          <td>{{item.mov}}</td>
+          <td>{{item.movid}}</td>
+          <td>{{item.fechaVenta}}</td>
+          <td>{{item.fechaCompra}}</td>
+          <td>{{item.descripUnidad}}</td>
+          <td>{{item.modelo}}</td>
+          <td>{{item.situacion}}</td>
+          <td>{{item.cc}}</td>
+          <td>{{item.venta}}</td>
+          <td>{{item.costo}}</td>
+          <td>{{item.rebate}}</td>
+          <td>{{item.notaCredito}}</td>
+          <td>{{item.accesoriosV}}</td>
+          <td>{{item.incentivos}}</td>
+          <td>{{item.accesoriosC}}</td>
+          <td>{{item.gastos}}</td>
+          <td>{{item.costoExtra}}</td>
+          <td>{{item.participacion}}</td>
+          <td>{{item.utilidadBruta}}</td>
+          <td>
+            <div class="float mx-3" (click)="editar(item)" data-toggle="modal" 
+            data-target="#exampleModal">
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+          </td>
+          <td>
+            <div class="float mx-3" (click)="eliminar(item)">
+              <i class="far fa-trash-alt"></i>
+            </div>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+   
+  </div>
+<!--   Agregar -->
+  <div class="card text-center mt-3 mx-auto" style="width: 600px;">
+      <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <button class="btn btn-dark mb-3 mt-3 nav-link active" 
+            (click)="activo='manual'">Manual</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-danger mb-3 mt-3 nav-link" 
+            (click)="activo='archivo'">Archivo</button>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <div class="d-none" [ngClass]="{'d-block':activo=='manual'}">
+          <h5 class="card-title">Manual</h5>
+          <form (ngSubmit)="agregar()">
+            
+            <div class="form-group">
+                <label for="Inpt1">Clave de la agencia:</label>
+                
+                <input 
+                type="text" placeholder="Ingresa la clave de la agencia" 
+                name="agencia" class="form-control" id="Inpt1"
+                [(ngModel)]="item.agencia"
+                >
+                <!-- En prueba -->
+                
+                <select id="Inpt1" class="form-control" [(ngModel)]="item.agencia"> <!-- Como usar con ngModel ???'-->
+                    <option *ngFor= "let agen of agencias" >{{agen}}</option>
+                </select>
+                
+              </div>
+              <div class="form-group">
+                <label for="Inpt2">Vin:</label>
+                <input 
+                type="text" placeholder="Ingresa el vin" 
+                name="vin" class="form-control"
+                [(ngModel)]="item.vin" id="Inpt2"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt3">Clave del cliente:</label>
+                <input 
+                type="number" placeholder="Ingresa la clave del cliente" 
+                name="cliente" class="form-control"
+                [(ngModel)]="item.cliente" id="Inpt3"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt4">Nombre del cliente:</label>
+                <input 
+                type="text" placeholder="Ingresa el nombre del cliente" 
+                name="nombreCliente" class="form-control"
+                [(ngModel)]="item.nombreCliente" id="Inpt4"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt5">Clave del agente:</label>
+                <input 
+                type="text" placeholder="Ingresa el nombre del agente" 
+                name="agente" class="form-control"
+                [(ngModel)]="item.agente" id="Inpt5"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt6">Nombre del agente:</label>
+                <input 
+                type="text" placeholder="Ingresa el nombre del agente" 
+                name="nombreAgente" class="form-control"
+                [(ngModel)]="item.nombreAgente" id="Inpt6"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt7">Tipo de movimiento:</label>
+                <input 
+                type="text" placeholder="Ingresa el tipo del mov" 
+                name="mov" class="form-control"
+                [(ngModel)]="item.mov" id="Inpt7"
+                >
+                <select id="Inpt7" class="form-control"> <!-- Como usar con ngModel ???'-->
+                  <option *ngFor= "let movs of movimientos" >{{movs}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Inpt8">Clave del movimiento id:</label>
+                <input 
+                type="text" placeholder="Ingresa la clave del movid" 
+                name="movid" class="form-control"
+                [(ngModel)]="item.movid" id="Inpt8"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt9">Fecha de venta:</label>
+                <input 
+                type="text" placeholder="Ingresa la fecha de venta" 
+                name="fechaVenta" class="form-control"
+                [(ngModel)]="item.fechaVenta" id="Inpt9"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt10">Fecha de compra:</label>
+                <input 
+                type="text" placeholder="Ingresa la fecha de compra" 
+                name="fechaCompra" class="form-control"
+                [(ngModel)]="item.fechaCompra" id="Inpt10"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt11">descripcion de la unidad:</label>
+                <input 
+                type="text" placeholder="Ingresa la descripcion de la unidad" 
+                name="descripUnidad" class="form-control"
+                [(ngModel)]="item.descripUnidad" id="Inpt11"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt12">Modelo:</label>
+                <input 
+                type="number" placeholder="Ingresa el modelo" 
+                name="modelo" class="form-control"
+                [(ngModel)]="item.modelo" id="Inpt12"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt13">Situacion:</label>
+                <input 
+                type="text" placeholder="Ingresa la situacion de la unidad" 
+                name="situacion" class="form-control"
+                [(ngModel)]="item.situacion" id="Inpt13"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt14">CC:</label>
+                <input 
+                type="text" placeholder="Ingresa el cc" 
+                name="cc" class="form-control"
+                [(ngModel)]="item.cc" id="Inpt14"
+                >
+                <select id="Inpt14" class="form-control"> <!-- Como usar con ngModel ???'-->
+                  <option *ngFor= "let ccs of tipoCC" >{{ccs}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Inpt15">Precio de la venta:</label>
+                <input 
+                type="number" placeholder="Ingresa el precio de la venta" 
+                name="venta" class="form-control"
+                [(ngModel)]="item.venta" id="Inpt15"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt16">Costo:</label>
+                <input 
+                type="number" placeholder="Ingresa el costo" 
+                name="costo" class="form-control"
+                [(ngModel)]="item.costo" id="Inpt16"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt17">Rebate:</label>
+                <input 
+                type="number" placeholder="Ingresa el rebate" 
+                name="rebate" class="form-control"
+                [(ngModel)]="item.rebate" id="Inpt17"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt18">Nota de credito:</label>
+                <input 
+                type="number" placeholder="Ingresa la nota credito" 
+                name="notaCredito" class="form-control"
+                [(ngModel)]="item.notaCredito" id="Inpt18"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt19">AccesoriosV:</label>
+                <input 
+                type="number" placeholder="Ingresa los accesoriosV" 
+                name="accesoriosV" class="form-control"
+                [(ngModel)]="item.accesoriosV" id="Inpt19"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt20">Incentivos:</label>
+                <input 
+                type="number" placeholder="Ingresa los incentivos" 
+                name="incentivos" class="form-control"
+                [(ngModel)]="item.incentivos" id="Inpt20"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt21">AccesoriosC:</label>
+                <input 
+                type="number" placeholder="Ingresa los accesoriosC" 
+                name="accesoriosC" class="form-control"
+                [(ngModel)]="item.accesoriosC" id="Inpt21"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt22">Gastos:</label>
+                <input 
+                type="number" placeholder="Ingresa los gastos" 
+                name="gastos" class="form-control"
+                [(ngModel)]="item.gastos" id="Inpt22"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt23">Costo extra:</label>
+                <input 
+                type="number" placeholder="Ingresa los costos extra" 
+                name="costoExtra" class="form-control"
+                [(ngModel)]="item.costoExtra" id="Inpt23"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt24">Participacion:</label>
+                <input 
+                type="number" placeholder="Ingresa la participacion" 
+                name="participacion" class="form-control"
+                [(ngModel)]="item.participacion" id="Inpt24"
+                >
+              </div>
+              <div class="form-group">
+                <label for="Inpt25">Utililidad bruta:</label>
+                <input 
+                type="number" placeholder="Ingresa la utilidad bruta" 
+                name="utilidadBruta" class="form-control"
+                [(ngModel)]="item.utilidadBruta" id="Inpt25"
+                >
+              </div>
+              <button class="btn btn-warning mt-3" type="submit">Agregar</button>
+            </form>
+        </div>
+        <div class="d-none" [ngClass]="{'d-block':activo=='archivo'}">
+          <h5 class="card-title">Archivo</h5>
+          <form>
+            <div class="form-group">
+              <label for="File1">Seleccionar archivo</label>
+              <input type="file" class="form-control-file" id="File1">
+            </div>
+          </form>
+          <button class="btn btn-warning mt-3" type="submit">Agregar</button>
+        </div>
+      </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Movid: {{editarItem.movid}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="agregarItemEditado()">
+          <div class="form-group">
+            <label for="Input1">Clave de la agencia:</label>
+            <input 
+            type="text" placeholder="Ingresa la clave de la agencia" 
+            name="agencia" class="form-control" id="Input1"
+            [(ngModel)]="editarItem.agencia"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input2">Vin:</label>
+            <input 
+            type="text" placeholder="Ingresa el vin" 
+            name="vin" class="form-control"
+            [(ngModel)]="editarItem.vin" id="Input2"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input3">Clave del cliente:</label>
+            <input 
+            type="number" placeholder="Ingresa la clave del cliente" 
+            name="cliente" class="form-control"
+            [(ngModel)]="editarItem.cliente" id="Input3"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input4">Nombre del cliente:</label>
+            <input 
+            type="text" placeholder="Ingresa el nombre del cliente" 
+            name="nombreCliente" class="form-control"
+            [(ngModel)]="editarItem.nombreCliente" id="Input4"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input5">Clave del agente:</label>
+            <input 
+            type="text" placeholder="Ingresa la clave del agente" 
+            name="nombreAgente" class="form-control"
+            [(ngModel)]="editarItem.nombreAgente" id="Input5"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input6">Nombre del agente:</label>
+            <input 
+            type="text" placeholder="Ingresa el nombre del agente" 
+            name="nombreAgente" class="form-control"
+            [(ngModel)]="editarItem.nombreAgente" id="Input6"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Inpt7">Tipo de movimiento:</label>
+            <input 
+            type="text" placeholder="Ingresa el tipo del mov"
+            name="mov" class="form-control"
+            [(ngModel)]="editarItem.mov" id="Input7"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input8">Clave del movimiento id:</label>
+            <input 
+            type="text" placeholder="Ingresa la clave del movid" 
+            name="movid" class="form-control"
+            [(ngModel)]="editarItem.movid" id="Input8"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input9">Fecha de venta:</label>
+            <input 
+            type="text" placeholder="Ingresa la fecha de venta" 
+            name="fechaVenta" class="form-control"
+            [(ngModel)]="editarItem.fechaVenta" id="Input9"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input10">Fecha de compra:</label>
+            <input 
+            type="text" placeholder="Ingresa la fecha de compra" 
+            name="fechaCompra" class="form-control"
+            [(ngModel)]="editarItem.fechaCompra" id="Input10"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input11">descripcion de la unidad:</label>
+            <input 
+            type="text" placeholder="Ingresa la descripcion de la unidad" 
+            name="descripUnidad" class="form-control"
+            [(ngModel)]="editarItem.descripUnidad" id="Input11"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input12">Modelo:</label>
+            <input 
+            type="number" placeholder="Ingresa el modelo" 
+            name="modelo" class="form-control"
+            [(ngModel)]="editarItem.modelo" id="Input12"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input13">Situacion:</label>
+            <input 
+            type="text" placeholder="Ingresa la situacion de la unidad" 
+            name="situacion" class="form-control"
+            [(ngModel)]="editarItem.situacion" id="Input13"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input14">CC:</label>
+            <input 
+            type="text" placeholder="Ingresa el cc" 
+            name="cc" class="form-control"
+            [(ngModel)]="editarItem.cc" id="Input14"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input15">Precio de la venta:</label>
+            <input 
+            type="number" placeholder="Ingresa el precio de la venta" 
+            name="venta" class="form-control"
+            [(ngModel)]="editarItem.venta" id="Input15"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input16">Costo:</label>
+            <input 
+            type="number" placeholder="Ingresa el costo" 
+            name="costo" class="form-control"
+            [(ngModel)]="editarItem.costo" id="Input16"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input17">Rebate:</label>
+            <input 
+            type="number" placeholder="Ingresa el rebate" 
+            name="rebate" class="form-control"
+            [(ngModel)]="editarItem.rebate" id="Input17"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input18">Nota de credito:</label>
+            <input 
+            type="number" placeholder="Ingresa la nota credito" 
+            name="notaCredito" class="form-control"
+            [(ngModel)]="editarItem.notaCredito" id="Input18"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input19">AccesoriosV:</label>
+            <input 
+            type="number" placeholder="Ingresa los accesoriosV" 
+            name="accesoriosV" class="form-control"
+            [(ngModel)]="editarItem.accesoriosV" id="Input19"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input20">Incentivos:</label>
+            <input 
+            type="number" placeholder="Ingresa los incentivos" 
+            name="incentivos" class="form-control"
+            [(ngModel)]="editarItem.incentivos" id="Input20"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input21">AccesoriosC:</label>
+            <input 
+            type="number" placeholder="Ingresa los accesoriosC" 
+            name="accesoriosC" class="form-control"
+            [(ngModel)]="editarItem.accesoriosC" id="Input21"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input22">Gastos:</label>
+            <input 
+            type="number" placeholder="Ingresa los gastos" 
+            name="gastos" class="form-control"
+            [(ngModel)]="editarItem.gastos" id="Input22"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input23">Costo extra:</label>
+            <input 
+            type="number" placeholder="Ingresa los costos extra" 
+            name="costoExtra" class="form-control"
+            [(ngModel)]="editarItem.costoExtra" id="Input23"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input24">Participacion:</label>
+            <input 
+            type="number" placeholder="Ingresa la participacion" 
+            name="participacion" class="form-control"
+            [(ngModel)]="editarItem.participacion" id="Input24"
+            >
+          </div>
+          <div class="form-group">
+            <label for="Input25">Utililidad bruta:</label>
+            <input 
+            type="number" placeholder="Ingresa la utilidad bruta" 
+            name="utilidadBruta" class="form-control"
+            [(ngModel)]="editarItem.utilidadBruta" id="Input25"
+            >
+          </div>
+          <button class="btn btn-warning mt-3" type="submit">Editar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
