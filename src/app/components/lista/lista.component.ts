@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from '../../services/conexion.service';
+
 //import { Observable } from 'rxjs';
 
 @Component({
@@ -45,8 +46,12 @@ export class ListaComponent implements OnInit {
     })
   }
 
+
+  
   ngOnInit() {
   }
+
+  
   agregar(){
     this.conexion.agregarItem(this.item);
     this.item.nombreCliente = '';

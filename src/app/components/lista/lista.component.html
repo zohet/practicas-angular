@@ -107,11 +107,20 @@
                 name="agencia" class="form-control" id="Inpt1"
                 [(ngModel)]="item.agencia"
                 >
-                <!-- En prueba -->
-                
-                <select id="Inpt1" class="form-control" [(ngModel)]="item.agencia"> <!-- Como usar con ngModel ???'-->
-                    <option *ngFor= "let agen of agencias" >{{agen}}</option>
-                </select>
+                 
+                <!-- En prueba 
+                <select id="Inpt1" class="form-control" [(value)]='agen[i]' [(ngModel)]="item.agencia = 'agen[i]' ">
+                    <option *ngFor= "let agen of agencias; index as i" value = agen  >{{agen[i]}}</option>
+                </select [(ngModel)]="item.vin = 'select' "> -->
+
+                <!--
+                    <select [(value)]="item.agencia">
+                      <option>None</option>
+                      <option value="NICUO">NICUO</option>
+                      <option value="HOSAO">HOSAO</option>
+                      <option value="MAACO">MAACO</option>
+                    </select>-->
+                  
                 
               </div>
               <div class="form-group">
